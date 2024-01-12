@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,12 +19,17 @@ public class ReservationService {
     StationDao stationDao;
 
     public void saveReservation(Reservation reservation){
+        reservationDAO.save(reservation);
+        log.info("Reservation has been successfully saved");
+    }
+    public void saveReservationAvailable(Reservation reservation){
         if (stationDao.isAvailable(reservation.getStation(), reservation.getReservationDate())) {
             reservationDAO.save(reservation);
+            log.info("Reservation has been successfully saved");
         } else {
             throw new NotAvailableException(reservation.getStation());
         }
-        log.info("Reservation has been successfully saved");
+
     }
 
     public Reservation findById(long id){
@@ -49,6 +55,10 @@ public class ReservationService {
         found.setStation(reservation.getStation());
         reservationDAO.save(found);
         log.info("The reservation whit id " + id + " has been successfully updated");
+    }
+
+    public void findByDate(LocalDate reservationDate){
+        reservationDAO.findByReservationDate(reservationDate);
     }
 
 }

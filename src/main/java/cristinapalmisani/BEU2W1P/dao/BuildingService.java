@@ -1,7 +1,6 @@
 package cristinapalmisani.BEU2W1P.dao;
 
 import cristinapalmisani.BEU2W1P.entities.Building;
-import cristinapalmisani.BEU2W1P.entities.Reservation;
 import cristinapalmisani.BEU2W1P.exception.ItemNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +41,12 @@ public class BuildingService {
         found.setName(building.getName());
         found.setReservations(building.getReservations());
         log.info("The building whit id " + id + " has been successfully updated");
+    }
+
+    public List<Building> findByCity(String city) {
+        return null;
+    }
+    public Building getRandBuilding() {
+        return buildingDao.getRandBuilding();
     }
 }

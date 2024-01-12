@@ -44,4 +44,8 @@ public class UserService {
         found.setReservations(user.getReservations());
         log.info("The user whit id " + id + " has been successfully updated");
     }
+
+    public User getRandUser() {
+        return userDao.getRandUser();
+    }
 }

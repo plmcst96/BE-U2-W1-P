@@ -1,4 +1,4 @@
-package cristinapalmisani.BEU2W1P;
+package cristinapalmisani.BEU2W1P.runner;
 
 import com.github.javafaker.Faker;
 import cristinapalmisani.BEU2W1P.dao.BuildingService;
@@ -37,27 +37,44 @@ public class ReservationManagementRunner implements CommandLineRunner {
         User user2 = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName());
         User user3 = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName());
 
-        userService.saveUser(user1);
+        /*userService.saveUser(user1);
         userService.saveUser(user2);
-        userService.saveUser(user3);
+        userService.saveUser(user3);*/
 
-        log.info("--------------- CREAZIONE STATION -------------");
-        Station station1 = new Station("Sala riunioni Andromeda", StationType.MEETING_ROOM, rnd.nextInt(10, 150));
-        Station station2 = new Station("Ampio openspace per riuniioni ed eventi", StationType.OPENSPACE, rnd.nextInt(10, 150));
-        Station station3 = new Station(fake.lorem().paragraph(1), fake.options().option(StationType.class), rnd.nextInt(10, 150));
-
-        stationService.saveStation(station1);
-        stationService.saveStation(station2);
-        stationService.saveStation(station3);
+        for (int i = 0; i < 15; i++) {
+            User user = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName());
+            userService.saveUser(user);
+        }
 
         log.info("--------------- CREAZIONE BUILDING -------------");
         Building building1 = new Building(fake.gameOfThrones().house(), fake.address().fullAddress(), fake.address().city());
         Building building2 = new Building(fake.gameOfThrones().house(), fake.address().fullAddress(), fake.address().city());
         Building building3 = new Building(fake.gameOfThrones().house(), fake.address().fullAddress(), fake.address().city());
 
-        buildingService.saveBuilding(building1);
+        for (int i = 0; i < 15; i++) {
+            Building building = new Building(fake.gameOfThrones().house(), fake.address().fullAddress(), fake.address().city());
+            buildingService.saveBuilding(building);
+        }
+
+        /*buildingService.saveBuilding(building1);
         buildingService.saveBuilding(building2);
-        buildingService.saveBuilding(building3);
+        buildingService.saveBuilding(building3);*/
+
+
+        log.info("--------------- CREAZIONE STATION -------------");
+        Station station1 = new Station("Sala riunioni Andromeda", StationType.MEETING_ROOM, rnd.nextInt(10, 150), building2);
+        Station station2 = new Station("Ampio openspace per riuniioni ed eventi", StationType.OPENSPACE, rnd.nextInt(10, 150), building1);
+        Station station3 = new Station(fake.lorem().paragraph(1), fake.options().option(StationType.class), rnd.nextInt(10, 150), building3);
+
+       /* stationService.saveStation(station1);
+        stationService.saveStation(station2);
+        stationService.saveStation(station3);*/
+
+        for (int i = 0; i < 15; i++) {
+            Station station = new Station(fake.lorem().paragraph(1), fake.options().option(StationType.class), rnd.nextInt(10, 150),
+                    new Building(fake.gameOfThrones().house(), fake.address().fullAddress(), fake.address().city()));
+            stationService.saveStation(station);
+        }
 
         log.info("--------------- CREAZIONE RESERVATION -------------");
 
@@ -70,10 +87,10 @@ public class ReservationManagementRunner implements CommandLineRunner {
         Reservation res4 = new Reservation(LocalDate.of(rnd.nextInt(2024, 2027), rnd.nextInt(1, 12), rnd.nextInt(1, 28)),
                 true, user2, station1, building2);
 
-        reservationService.saveReservation(res1);
+        /*reservationService.saveReservation(res1);
         reservationService.saveReservation(res2);
         reservationService.saveReservation(res3);
-        reservationService.saveReservation(res4);
+        reservationService.saveReservation(res4);*/
 
 
     }

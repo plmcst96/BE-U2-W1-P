@@ -1,6 +1,7 @@
 package cristinapalmisani.BEU2W1P.dao;
 
 import cristinapalmisani.BEU2W1P.entities.Station;
+import cristinapalmisani.BEU2W1P.entities.StationType;
 import cristinapalmisani.BEU2W1P.exception.ItemWhitUUIDNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,25 @@ public class StationService {
     }
     public boolean isAvailable(Station station, LocalDate now) {
         return stationDao.isAvailable(station, now);
+    }
+
+    public List<Station> getAvailable(LocalDate date) {
+        return stationDao.getAvailable(date);
+    }
+
+    public List<Station> findByType(StationType type) {
+        return stationDao.findByStationType(type);
+    }
+
+    public List<Station> findByBuildingCity(String city) {
+        return stationDao.findByBuildingCity(city);
+    }
+
+    public List<Station> findByTypeAndBuildingCity(StationType type, String city) {
+        return stationDao.findByStationTypeAndBuildingCity(type, city);
+    }
+
+    public Station getRandStation() {
+        return stationDao.getRandStation();
     }
 }

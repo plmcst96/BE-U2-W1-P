@@ -34,9 +34,11 @@ public class Station {
             inverseJoinColumns = @JoinColumn(name = "reservation_id"))
     private List<User> users;
 
-    public Station(String description, StationType stationType, int numMaxOccupants) {
+    public Station(String description, StationType stationType, int numMaxOccupants, Building building) {
         this.description = description;
         this.stationType = stationType;
         this.numMaxOccupants = numMaxOccupants;
+        this.building = building;
     }
+
 }
