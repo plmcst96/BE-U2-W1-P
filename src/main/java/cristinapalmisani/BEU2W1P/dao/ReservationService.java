@@ -2,6 +2,7 @@ package cristinapalmisani.BEU2W1P.dao;
 
 import cristinapalmisani.BEU2W1P.entities.Reservation;
 import cristinapalmisani.BEU2W1P.exception.ItemNotFoundException;
+import cristinapalmisani.BEU2W1P.exception.NotAvailableException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,15 @@ import java.util.List;
 public class ReservationService {
     @Autowired
     private ReservationDAO reservationDAO;
+    @Autowired
+    StationDao stationDao;
 
     public void saveReservation(Reservation reservation){
-        reservationDAO.save(reservation);
+        if (stationDao.isAvailable(reservation.getStation(), reservation.getReservationDate())) {
+            reservationDAO.save(reservation);
+        } else {
+            throw new NotAvailableException(reservation.getStation());
+        }
         log.info("Reservation has been successfully saved");
     }
 
