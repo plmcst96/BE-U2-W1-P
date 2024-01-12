@@ -24,5 +24,8 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;
+    @ManyToOne
+    @JoinColumn(name = "building_id")
+    private Building building;
 
 }
