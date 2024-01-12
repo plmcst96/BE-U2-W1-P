@@ -11,10 +11,14 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
 public class Reservation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
+
+    private long id;
+    @Column(name = "reservation_date")
     private LocalDate reservationDate;
     private boolean isFree;
     private LocalTime endDate = LocalTime.of(23, 59, 59).plusSeconds(1);
@@ -28,4 +32,11 @@ public class Reservation {
     @JoinColumn(name = "building_id")
     private Building building;
 
+    public Reservation(LocalDate reservationDate, boolean isFree, User user, Station station, Building building) {
+        this.reservationDate = reservationDate;
+        this.isFree = isFree;
+        this.user = user;
+        this.station = station;
+        this.building = building;
+    }
 }

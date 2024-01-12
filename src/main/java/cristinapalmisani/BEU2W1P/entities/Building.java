@@ -20,7 +20,13 @@ public class Building {
     private String name;
     private String address;
     private String city;
-    @OneToMany(mappedBy = "buildings")
+    @OneToMany(mappedBy = "building")
     @ToString.Exclude
     private List<Reservation> reservations;
+
+    public Building(String name, String address, String city) {
+        this.name = name;
+        this.address = address;
+        this.city = city;
+    }
 }

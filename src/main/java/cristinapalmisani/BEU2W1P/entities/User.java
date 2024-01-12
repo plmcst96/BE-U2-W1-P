@@ -27,6 +27,13 @@ public class User {
             joinColumns = @JoinColumn(name = "reservation_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<Station> stations;
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
+
+    public User(String username, String name, String email, String surname) {
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.surname = surname;
+    }
 }
