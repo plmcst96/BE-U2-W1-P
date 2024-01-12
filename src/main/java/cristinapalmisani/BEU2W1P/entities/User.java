@@ -30,10 +30,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
 
-    public User(String username, String name, String email, String surname) {
+    public User(String username, String name, String email, String surname, List<Station> stations) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.surname = surname;
+        this.stations = stations;
     }
 }

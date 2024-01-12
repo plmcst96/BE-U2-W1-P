@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 
 @Component
@@ -33,16 +34,16 @@ public class ReservationManagementRunner implements CommandLineRunner {
 
         log.info("--------------- CREAZIONE USER -------------");
 
-        User user1 = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName());
+   /*     User user1 = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName());
         User user2 = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName());
-        User user3 = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName());
+        User user3 = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName());*/
 
         /*userService.saveUser(user1);
         userService.saveUser(user2);
         userService.saveUser(user3);*/
 
         for (int i = 0; i < 15; i++) {
-            User user = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName());
+            User user = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName(), List.of(stationService.getRandStation()));
             userService.saveUser(user);
         }
 
@@ -62,9 +63,9 @@ public class ReservationManagementRunner implements CommandLineRunner {
 
 
         log.info("--------------- CREAZIONE STATION -------------");
-        Station station1 = new Station("Sala riunioni Andromeda", StationType.MEETING_ROOM, rnd.nextInt(10, 150), building2);
+      /*  Station station1 = new Station("Sala riunioni Andromeda", StationType.MEETING_ROOM, rnd.nextInt(10, 150), building2);
         Station station2 = new Station("Ampio openspace per riuniioni ed eventi", StationType.OPENSPACE, rnd.nextInt(10, 150), building1);
-        Station station3 = new Station(fake.lorem().paragraph(1), fake.options().option(StationType.class), rnd.nextInt(10, 150), building3);
+        Station station3 = new Station(fake.lorem().paragraph(1), fake.options().option(StationType.class), rnd.nextInt(10, 150), building3);*/
 
        /* stationService.saveStation(station1);
         stationService.saveStation(station2);
@@ -72,20 +73,26 @@ public class ReservationManagementRunner implements CommandLineRunner {
 
         for (int i = 0; i < 15; i++) {
             Station station = new Station(fake.lorem().paragraph(1), fake.options().option(StationType.class), rnd.nextInt(10, 150),
-                    new Building(fake.gameOfThrones().house(), fake.address().fullAddress(), fake.address().city()));
+                    buildingService.getRandBuilding(), List.of(userService.getRandUser()));
             stationService.saveStation(station);
         }
 
         log.info("--------------- CREAZIONE RESERVATION -------------");
 
-        Reservation res1 = new Reservation(LocalDate.of(rnd.nextInt(2024, 2027), rnd.nextInt(1, 12), rnd.nextInt(1, 28)),
+      /*  Reservation res1 = new Reservation(LocalDate.of(rnd.nextInt(2024, 2027), rnd.nextInt(1, 12), rnd.nextInt(1, 28)),
                 true, user1, station1, building1);
         Reservation res2 = new Reservation(LocalDate.of(rnd.nextInt(2024, 2027), rnd.nextInt(1, 12), rnd.nextInt(1, 28)),
                 false, user2, station2, building2);
         Reservation res3 = new Reservation(LocalDate.of(rnd.nextInt(2024, 2027), rnd.nextInt(1, 12), rnd.nextInt(1, 28)),
                 true, user3, station3, building3);
         Reservation res4 = new Reservation(LocalDate.of(rnd.nextInt(2024, 2027), rnd.nextInt(1, 12), rnd.nextInt(1, 28)),
-                true, user2, station1, building2);
+                true, user2, station1, building2);*/
+
+        for (int i = 0; i < 15; i++) {
+            Reservation res = new Reservation(LocalDate.of(rnd.nextInt(2024, 2027), rnd.nextInt(1, 12), rnd.nextInt(1, 28)),
+                    true, userService.getRandUser(), stationService.getRandStation(), buildingService.getRandBuilding());
+
+        }
 
         /*reservationService.saveReservation(res1);
         reservationService.saveReservation(res2);
