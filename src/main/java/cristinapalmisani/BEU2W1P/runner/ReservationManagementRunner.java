@@ -44,7 +44,7 @@ public class ReservationManagementRunner implements CommandLineRunner {
 
         for (int i = 0; i < 15; i++) {
             User user = new User(fake.name().username(), fake.name().firstName(), fake.internet().emailAddress() ,fake.name().lastName(), List.of(stationService.getRandStation()));
-            userService.saveUser(user);
+            //userService.saveUser(user);
         }
 
         log.info("--------------- CREAZIONE BUILDING -------------");
@@ -54,7 +54,7 @@ public class ReservationManagementRunner implements CommandLineRunner {
 
         for (int i = 0; i < 15; i++) {
             Building building = new Building(fake.gameOfThrones().house(), fake.address().fullAddress(), fake.address().city());
-            buildingService.saveBuilding(building);
+            //buildingService.saveBuilding(building);
         }
 
         /*buildingService.saveBuilding(building1);
@@ -74,7 +74,7 @@ public class ReservationManagementRunner implements CommandLineRunner {
         for (int i = 0; i < 15; i++) {
             Station station = new Station(fake.lorem().paragraph(1), fake.options().option(StationType.class), rnd.nextInt(10, 150),
                     buildingService.getRandBuilding(), List.of(userService.getRandUser()));
-            stationService.saveStation(station);
+            //stationService.saveStation(station);
         }
 
         log.info("--------------- CREAZIONE RESERVATION -------------");
@@ -91,6 +91,8 @@ public class ReservationManagementRunner implements CommandLineRunner {
         for (int i = 0; i < 15; i++) {
             Reservation res = new Reservation(LocalDate.of(rnd.nextInt(2024, 2027), rnd.nextInt(1, 12), rnd.nextInt(1, 28)),
                     true, userService.getRandUser(), stationService.getRandStation(), buildingService.getRandBuilding());
+                    //reservationService.saveReservationAvailable(res);
+                    reservationService.saveReservation(res);
 
         }
 
